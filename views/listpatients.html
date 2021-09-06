@@ -1,0 +1,36 @@
+<html>
+
+<head>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+</head>
+
+<body>
+    <h1>List patients</h1> </br>
+    <h1>
+        <a href="/">Home</a>
+    </h1>
+    <table>
+        <tr>
+            <td>full name</td>
+            <td>doctor id</td>
+            <td>doctor name</td>
+            <td>age</td>
+            <td>date of visit</td>
+            <td>case Description</td>
+        </tr>
+        <% for (let i=0;i<patientsDb.length;i++){ %>
+            <tr>
+                <td><%= patientsDb[i].fullname %> </td>
+                <td><%= patientsDb[i].doctor._id %> </td>
+                <td><%= patientsDb[i].doctor.name.firstName + " " + patientsDb[i].doctor.name.lastName %> </td>
+                <td><%= patientsDb[i].age%></td>
+                <td><%= patientsDb[i].dov %></td>
+                <td><%= patientsDb[i].caseDesc %></td>
+            </tr>
+            <%}%>
+    </table>
+</body>
+
+</html>
