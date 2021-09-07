@@ -3,13 +3,13 @@ const Actor = require('../models/actor');
 const Movie = require('../models/movie');
 module.exports = {
     getAll: function (req, res) {
-        Actor.find(function (err, actors) {
-            if (err) {
-                return res.status(404).json(err);
-            } else {
-                res.json(actors);
-            }
-        });
+        Actor.find({})
+        .populate('movies') //popualate with movies to get details
+        .exec(function (err, actor) {
+            if (err) return res.status(400).json(err);
+            if (!actor) return res.status(404).json();
+            res.json(actor);
+         });
     },
     createOne: function (req, res) {
         let newActorDetails = req.body;
@@ -57,7 +57,7 @@ module.exports = {
         });
     },
     deleteOnenActors: function (req,res){
-        Actor.findOne({ _id: req.params.id }, function (err, actors) {
+        Actor.findOne({ _id: req.params.actorId }, function (err, actors) {
             if (err) return res.status(400).json(err);
             if (!actors) return res.status(404).json();
             //delete movies next
@@ -74,6 +74,23 @@ module.exports = {
         Actor.findOneAndRemove({ _id: req.params.id }, function (err,actors) {
             if (err) return res.status(400).json(err);
             res.json(actors);
+        });
+    },
+    //Q3
+    deleteOneMovieList: function(req,res){
+        Actor.findOne({ _id: req.params.aId }, function (err, actor) {
+            if (err) return res.status(400).json(err);
+            if (!actor) return res.status(404).json();
+            let movieId = req.params.mId;
+            for(let i=0; i<actor.movies.length;i++){
+                if(actor.movies[i]==movieId){
+                    (actor.movies).splice(i,1);
+                    actor.save(function (err) {
+                        if (err) return res.status(500).json(err);
+                        res.json(actor);
+                    });
+                }
+            }
         });
     }
 };

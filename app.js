@@ -28,11 +28,16 @@ app.get('/actors/:id', actors.getOne);
 app.put('/actors/:id', actors.updateOne);
 app.post('/actors/:id/movies', actors.addMovie); //adds actor into actors document, movie in body, actor id in params
 app.delete('/actors/:id', actors.deleteOne);
-app.delete('/actorsNmovies/:id', actors.deleteOnenActors);
+app.delete('/actorsNmovies/:actorId', actors.deleteOnenActors); //Q2
+app.delete('/actors/:aId/:mId',actors.deleteOneMovieList); //Q3
 
 //Movie RESTFul  endpoints
 app.get('/movies', movies.getAll);
 app.post('/movies', movies.createOne);
 app.get('/movies/:id', movies.getOne);
 app.put('/movies/:id', movies.updateOne);
-app.delete('/movies/:id', movies.deleteOne);
+app.delete('/movies/:movieId', movies.deleteOne); //Q1
+app.delete('/movies/:actorId/:movieId', movies.deleteOneActorList)  // Q4 
+app.post('/movies/:movieId', movies.addActor) //Q5 actor_id has to be in body
+app.get('/movies/:year1/:year2', movies.getMoviesYears) //Q6
+app.delete('/movies/',movies.deleteMoviesYears) //Q9
