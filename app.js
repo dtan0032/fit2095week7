@@ -41,3 +41,4 @@ app.delete('/movies/:actorId/:movieId', movies.deleteOneActorList)  // Q4
 app.post('/movies/:movieId', movies.addActor) //Q5 actor_id has to be in body
 app.get('/movies/:year1/:year2', movies.getMoviesYears) //Q6
 app.delete('/movies/',movies.deleteMoviesYears) //Q9
+app.put('/moviesInc/', movies.addOneToMoviesYear) //Increase year

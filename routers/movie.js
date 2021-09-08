@@ -96,5 +96,19 @@ module.exports = {
             res.json();
         });
         console.log("delete successful.")
+    },
+    //Extra Task
+    addOneToMoviesYear: function(req,res){
+        let query = {title: /^X/}
+        Movie.updateMany(query, {$inc : {year : 1}}, function (err, movie) {
+            if (err) return res.status(400).json(err);
+            if (!movie) return res.status(404).json();
+            res.json(movie);
+        });
+        // Movie.findOneAndUpdate({ _id: req.params.id }, req.body, function (err, movie) {
+        //     if (err) return res.status(400).json(err);
+        //     if (!movie) return res.status(404).json();
+        //     res.json(movie);
+        // });
     }
 };
