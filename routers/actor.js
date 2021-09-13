@@ -71,7 +71,7 @@ module.exports = {
         });
         console.log("deleted movies")
         // delete the actor
-        Actor.findOneAndRemove({ _id: req.params.id }, function (err,actors) {
+        Actor.findOneAndRemove({ _id: req.params.actorId }, function (err,actors) {
             if (err) return res.status(400).json(err);
             res.json(actors);
         });
